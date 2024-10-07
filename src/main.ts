@@ -37,27 +37,27 @@ app.append(counterField)
 //automatic scoring
 //template for autoscore source
 class AutoScoreSource{
-    name:string;
-    baseValue:number;
-    quantity:number;
+    protected privName:string;
+    protected privBaseValue:number;
+    protected privQuantity:number;
     constructor(_name:string, _value:number, _quantity:number){
-        this.name = _name;
-        this.baseValue = _value;
-        this.quantity = _quantity;
+        this.privName = _name;
+        this.privBaseValue = _value;
+        this.privQuantity = _quantity;
     }
     //accessors
-    public getName():string{
-        return this.name;
+    get name():string{
+        return this.privName;
     }
-    public getValue():number{
-        return this.baseValue * this.quantity;
+    get value():number{
+        return this.privBaseValue * this.quantity;
     }
-    public getQuantity():number{
-        return this.quantity
+    get quantity():number{
+        return this.privQuantity
     }
     //setters
     public createMore(_q:number){
-        this.quantity += _q
+        this.privQuantity += _q
     }
 }
 const autoScoreSources:AutoScoreSource[] = []
@@ -75,7 +75,7 @@ function incAutoScores(_time:number, _arr:AutoScoreSource[] = autoScoreSources){
 
     let sum = 0;
     _arr.forEach(element => {
-        sum += element.getValue() * delta; // now only adds amount times delta
+        sum += element.value * delta; // now only adds amount times delta
     });
     incScore(sum)
     requestAnimationFrame(incAutoScores)
