@@ -15,7 +15,7 @@ let scoreDisplay:string = "0";
 //mainScore access func
 function incScore(add:number):void{ 
     mainScore += add
-    scoreDisplay = mainScore.toPrecision(3).toString()
+    scoreDisplay = mainScore.toLocaleString('fullwide', {maximumFractionDigits:2})
     counterField.innerText = "Orteils: " + scoreDisplay
 }
 
@@ -61,9 +61,9 @@ class AutoScoreSource{
     }
 }
 const autoScoreSources:AutoScoreSource[] = []
-//add default:1
+//NO LONGER ADD DEFAULT
 //need to add smth to verify no duplicates. will add during purchase stage
-autoScoreSources.push(new AutoScoreSource("default", 1, 1))
+//autoScoreSources.push(new AutoScoreSource("default", 1, 1))
 
 let frameCounterTimer = 0;
 requestAnimationFrame(incAutoScores)
@@ -80,3 +80,19 @@ function incAutoScores(_time:number, _arr:AutoScoreSource[] = autoScoreSources){
     incScore(sum)
     requestAnimationFrame(incAutoScores)
 }
+
+
+
+//SHOP
+
+// class ShopButton{
+//     name:string;
+//     value:number;
+//     cost:number;
+//     constructor(){
+
+//     }
+// }
+
+
+
