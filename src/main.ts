@@ -56,8 +56,8 @@ class AutoScoreSource{
         return this.privQuantity
     }
     //setters
-    public createMore(_q:number){
-        this.privQuantity += _q
+    set purchase(_amountPurchased:number){
+        this.privQuantity += _amountPurchased
     }
 }
 const autoScoreSources:AutoScoreSource[] = []
@@ -85,14 +85,30 @@ function incAutoScores(_time:number, _arr:AutoScoreSource[] = autoScoreSources){
 
 //SHOP
 
-// class ShopButton{
-//     name:string;
-//     value:number;
-//     cost:number;
-//     constructor(){
-
-//     }
-// }
+class ShopButton{
+    protected privName:string;
+    protected privValue:number;
+    protected privCost:number;
+    protected const privButtonElement;
+    constructor(_name:string, _value:number, _cost:number, _parent_DOM:Element){
+        this.privName = _name;
+        this.privValue = _value;
+        this.privCost = _cost;
+        this.privButtonElement = document.createElement("button")
+        _parent_DOM.appendChild(this.privButtonElement)
+        this.privButtonElement.innerText = "Purchase" + this.name + " for"
+    }
+    //accessors
+    get name():string{
+        return this.privName
+    }
+    get value():number{
+        return this.privValue;
+    }
+    get cost():number{
+        return this.privCost;
+    }
+}
 
 
 
