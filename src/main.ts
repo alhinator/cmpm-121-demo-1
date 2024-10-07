@@ -11,10 +11,12 @@ app.append(header);
 
 //this score is the main score, should never be modified directly, rather use incScore
 let mainScore:number = 0;
+let scoreDisplay:string = "0";
 //mainScore access func
 function incScore(add:number):void{ 
     mainScore += add
-    counterField.innerText = "Orteils: " + mainScore
+    scoreDisplay = mainScore.toPrecision(3).toString()
+    counterField.innerText = "Orteils: " + scoreDisplay
 }
 
 //add the clicker bar, clicker, and set the default value for clicks.
@@ -62,12 +64,19 @@ const autoScoreSources:AutoScoreSource[] = []
 //add default:1
 //need to add smth to verify no duplicates. will add during purchase stage
 autoScoreSources.push(new AutoScoreSource("default", 1, 1))
-setInterval(incAutoScores, 1000)
 
-function incAutoScores(_arr:AutoScoreSource[] = autoScoreSources){
+let frameCounterTimer = 0;
+requestAnimationFrame(incAutoScores)
+
+function incAutoScores(_time:number, _arr:AutoScoreSource[] = autoScoreSources){
+    const delta = (performance.now() - frameCounterTimer) / 1000; //get the delta between frames in terms of seconds
+    console.log(delta)
+    frameCounterTimer = performance.now()
+
     let sum = 0;
     _arr.forEach(element => {
-        sum += element.getValue()
+        sum += element.getValue() * delta; // now only adds amount times delta
     });
     incScore(sum)
+    requestAnimationFrame(incAutoScores)
 }
