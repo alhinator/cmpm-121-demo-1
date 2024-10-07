@@ -174,5 +174,7 @@ class ShopButton{
 
 
 new ShopButton("France", 1, 10, buttonField)
+new ShopButton("Twitter", 2, 100, buttonField)
+new ShopButton("CookieClicker", 50, 1000, buttonField)
 
 ShopButton.verifyAllButtons()
