@@ -56,59 +56,97 @@ class AutoScoreSource{
         return this.privQuantity
     }
     //setters
-    set purchase(_amountPurchased:number){
+    purchase(_amountPurchased:number){
         this.privQuantity += _amountPurchased
     }
 }
-const autoScoreSources:AutoScoreSource[] = []
+
+//the autoManager converts shop clicks into score sources, and does the incrementation during animation frames.
+class AutoManager{
+    protected static scSources:AutoScoreSource[] = []
+    //getters
+    static get sources() { //TODO
+        return AutoManager.scSources
+    }
+    static get prettySources(){
+        return null
+    }
+
+    //setters
+    static addSource(_new_src:AutoScoreSource){
+        //check if a source by the same name already exists
+        let dupe = false;
+        AutoManager.scSources.forEach(element => {
+            if (element.name == _new_src.name){
+                dupe = true;
+                //dupe? purchase another.
+                element.purchase(1)
+            }
+        });
+        if(dupe){return}
+        //if no duplicate names are found, add the source as a new one to the list.
+        AutoManager.scSources.push(_new_src);
+        return false;
+    }
+    
+    //the incrementer
+    static incAutoScores(_time:number, _arr:AutoScoreSource[] = AutoManager.scSources){
+        const delta = (performance.now() - frameCounterTimer) / 1000; //get the delta between frames in terms of seconds
+        //console.log(delta)
+        frameCounterTimer = performance.now()
+    
+        let sum = 0;
+        _arr.forEach(element => {
+            sum += element.value * delta; // now only adds amount times delta
+        });
+        incScore(sum)
+        requestAnimationFrame(AutoManager.incAutoScores)
+    }
+}
 //NO LONGER ADD DEFAULT
 //need to add smth to verify no duplicates. will add during purchase stage
-//autoScoreSources.push(new AutoScoreSource("default", 1, 1))
+AutoManager.addSource(new AutoScoreSource("a", 1, 1))
+AutoManager.addSource(new AutoScoreSource("a", 1, 1))
+console.log(AutoManager.sources)
 
 let frameCounterTimer = 0;
-requestAnimationFrame(incAutoScores)
+requestAnimationFrame(AutoManager.incAutoScores)
 
-function incAutoScores(_time:number, _arr:AutoScoreSource[] = autoScoreSources){
-    const delta = (performance.now() - frameCounterTimer) / 1000; //get the delta between frames in terms of seconds
-    console.log(delta)
-    frameCounterTimer = performance.now()
 
-    let sum = 0;
-    _arr.forEach(element => {
-        sum += element.value * delta; // now only adds amount times delta
-    });
-    incScore(sum)
-    requestAnimationFrame(incAutoScores)
-}
+
 
 
 
 //SHOP
 
-class ShopButton{
-    protected privName:string;
-    protected privValue:number;
-    protected privCost:number;
-    protected const privButtonElement;
-    constructor(_name:string, _value:number, _cost:number, _parent_DOM:Element){
-        this.privName = _name;
-        this.privValue = _value;
-        this.privCost = _cost;
-        this.privButtonElement = document.createElement("button")
-        _parent_DOM.appendChild(this.privButtonElement)
-        this.privButtonElement.innerText = "Purchase" + this.name + " for"
-    }
-    //accessors
-    get name():string{
-        return this.privName
-    }
-    get value():number{
-        return this.privValue;
-    }
-    get cost():number{
-        return this.privCost;
-    }
-}
+// class ShopButton{
+//     protected privName:string;
+//     protected privValue:number;
+//     protected privCost:number;
+//     protected privButtonElement:HTMLButtonElement;
+//     constructor(_name:string, _value:number, _cost:number, _parent_DOM:HTMLElement){
+//         this.privName = _name;
+//         this.privValue = _value;
+//         this.privCost = _cost;
+//         this.privButtonElement = document.createElement("button")
+//         _parent_DOM.appendChild(this.privButtonElement)
+//         this.privButtonElement.innerText = "Purchase" + this.name + " for " + this.cost + " Orteils."
+//         this.privButtonElement.onclick = function (){
+//             //purchase
+//             //this.
+//         }
+//     }
+//     //accessors
+//     get name():string{
+//         return this.privName
+//     }
+//     get value():number{
+//         return this.privValue;
+//     }
+//     get cost():number{
+//         return this.privCost;
+//     }
+// }
 
 
 
