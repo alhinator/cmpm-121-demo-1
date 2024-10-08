@@ -68,7 +68,7 @@ button:focus-visible {
   text-align: left;
   width: 11em;
   padding: 0.5em 0.6em;
-  background: url("./img/Orteil_tumblr_icon.webp");
+  background: url("/img/Orteil_tumblr_icon.webp");
   background-color: #1a1a1a;
 
   background-repeat: no-repeat;
