@@ -1,7 +1,7 @@
 import "./style.css";
-import { AutoManager } from "./AutoScoreSource";
-import { ShopButton } from "./ShopButton";
-
+//import { AutoManager } from "./AutoScoreSource";
+//import { ShopButton } from "./ShopButton";
+import * as Shop from "./Shop";
 
 const app: HTMLDivElement = document.querySelector("#app")!;
 
@@ -17,12 +17,33 @@ const shopDiv = document.createElement("div");
 shopDiv.setAttribute("class", "shop")
 app.append(shopDiv);
 
+
 //add clicker and info field
 const clickerDiv = document.createElement("div")
 clickerDiv.setAttribute("class", "clicker")
 app.append(clickerDiv)
 
 
+
+//new item adds
+const initItems: Shop.Item[] = [
+    {name: "France", value: 1, cost: 10},
+    {name: "Twitter", value: 2, cost: 100},
+    {name: "Cookie Clicker", value: 50, cost: 1000}
+]
+
+const initialButtons:Shop.ShopButton[] = [
+    {item: initItems[0], multCost:initItems[0].cost, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+    {item: initItems[1], multCost:initItems[1].cost, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+    {item: initItems[2], multCost:initItems[2].cost, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+]
+
+const mainShop:Shop.Shop = {
+    parentDiv:shopDiv,
+    allButtons:[]
+}
+mainShop.allButtons = initialButtons;
+Shop.activateHTML(mainShop)
 
 
 //this score is the main score, should never be modified directly, rather use incScore
@@ -35,7 +56,7 @@ export function incScore(add: number): void {
     scoreDisplay = mainScore.toFixed(2)
     counterField.innerText = "Orteils: " + scoreDisplay;
     //now verify buttons
-    ShopButton.verifyAllButtons();
+    Shop.verifyAllButtons(mainShop.allButtons, mainScore);
 }
 
 //add the clicker bar, clicker, and set the default value for clicks.
@@ -60,18 +81,28 @@ clickerDiv.append(counterField);
 const SPSField = document.createElement("h3")
 clickerDiv.appendChild(SPSField)
 export function updateSPS():void{
-    SPSField.innerText = "Total Orteils per second: " + AutoManager.valuePerSecond
+    SPSField.innerText = "Total Orteils per second: " + Shop.valuePerSecond(mainShop.allButtons)
 }
 
 
-//start the anim frame cycle. now updates frame count from within AutoManager
-requestAnimationFrame(AutoManager.incAutoScores);
+//start the anim frame cycle.
+let frameCounterTimer = 0
+ function autoScore(_time:number, items:Shop.ShopButton[] = mainShop.allButtons){
+    const delta = (performance.now() - frameCounterTimer) / 1000; //get the delta between frames in terms of seconds
+    frameCounterTimer = performance.now()
+    //console.log(delta)
+    let sum = 0;
+    items.forEach((element) => {
+        sum += element.item.value * element.numPurchased * delta;
+    })
+    incScore(sum)
+    requestAnimationFrame(autoScore)
+}
 
-//NO LONGER ADD "Default" autoscorer
+requestAnimationFrame(autoScore);
 
-//Add Shop Buttons and initially verify them (turn them off)
-new ShopButton("France", 1, 10, shopDiv);
-new ShopButton("Twitter", 2, 100, shopDiv);
-new ShopButton("CookieClicker", 50, 1000, shopDiv);
+// //NO LONGER ADD "Default" autoscorer
 
-ShopButton.verifyAllButtons();
+
+
+Shop.verifyAllButtons(mainShop.allButtons, mainScore);
