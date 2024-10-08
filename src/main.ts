@@ -124,7 +124,7 @@ class AutoManager {
 
         let sum = 0;
         _arr.forEach((element) => {
-            sum += element.value * delta; // now only adds amount times delta
+            sum += element.value * element.quantity * delta; // now only adds amount times delta
         });
         incScore(sum);
         requestAnimationFrame(AutoManager.incAutoScores);
@@ -151,7 +151,8 @@ class ShopButton {
     static allShopButtons: ShopButton[] = [];
     protected privName: string;
     protected privValue: number;
-    protected privCost: number;
+    protected baseCost: number;
+    protected multCost: number;
     protected privButtonElement: HTMLButtonElement;
     protected privButtonCounterText: HTMLParagraphElement;
     protected numPurchased:number = 0;
@@ -159,11 +160,13 @@ class ShopButton {
         _name: string,
         _value: number,
         _cost: number,
+        
         _parent_DOM: HTMLElement
     ) {
         this.privName = _name;
         this.privValue = _value;
-        this.privCost = _cost;
+        this.baseCost = _cost;
+        this.multCost = _cost
         this.privButtonElement = document.createElement("button");
         _parent_DOM.appendChild(this.privButtonElement);
         this.privButtonElement.innerText =
@@ -172,18 +175,15 @@ class ShopButton {
             " (" +
             _value +
             " O/s) for " +
-            this.cost +
+            this.multCost +
             " Orteils.";
         this.privButtonCounterText = document.createElement("p")
         this.updateOwnedText()
         _parent_DOM.appendChild(this.privButtonCounterText)
         _parent_DOM.appendChild(document.createElement("br"))
 
-
-
-
         this.privButtonElement.onclick = function () {
-            ShopButton.purchaseAButton(_name, _value, _cost);
+            ShopButton.purchaseAButton(_name);
         };
         ShopButton.allShopButtons.push(this);
     }
@@ -195,24 +195,44 @@ class ShopButton {
         return this.privValue;
     }
     get cost(): number {
-        return this.privCost;
+        return this.multCost;
+    }
+    get originalCost():number {
+        return this.baseCost
     }
     //helpers
-    static purchaseAButton(_name: string, _value: number, _cost: number) {
+    static purchaseAButton(_name: string) {
         console.log("in purchaseAbutton");
-        AutoManager.addSource(new AutoScoreSource(_name, _value, 1));
-        incScore(-_cost);
-        console.log(AutoManager.sources);
         ShopButton.allShopButtons.forEach((element) => {
-            if(element.name == _name){element.numPurchased ++}
-            element.updateOwnedText()
+            if(element.name == _name){
+                AutoManager.addSource(new AutoScoreSource(element.name, element.value, 1));
+                incScore(-element.multCost);
+                element.updatePrice()
+                element.updateOwnedText()
+            }
+            
         });        
     }
+    updatePrice(){
+        this.numPurchased++
+        this.multCost = (Number) ((this.baseCost * Math.pow(1.15, this.numPurchased)).toLocaleString("fullwide", {
+            maximumFractionDigits: 2,
+        }));
+    }
     updateOwnedText(){
+        this.privButtonElement.innerText =
+            "Purchase " +
+            this.name +
+            " (" +
+            this.privValue +
+            " O/s) for " +
+            this.multCost +
+            " Orteils.";
         this.privButtonCounterText.innerText = " Currently Owned: " + this.numPurchased;
     }
+    
     toggleClickable() {
-        if (mainScore >= this.cost) {
+        if (mainScore >= this.multCost) {
             this.privButtonElement.disabled = false;
         } else {
             this.privButtonElement.disabled = true;
