@@ -1,4 +1,4 @@
-import * as Shop from "./Shop"
+import * as Shop from "./Shop";
 
 export const initialButtons: Shop.ShopButton[] = [
     {
@@ -8,14 +8,15 @@ export const initialButtons: Shop.ShopButton[] = [
             cost: 10,
             unlockValue: 0,
             clickBonus: 0,
-            description:"The country of France. Produces Orteil42s at a slow rate."
+            description:
+                "The country of France. Produces Orteil42s at a slow rate.",
         },
         multCost: 10,
         numPurchased: 0,
         divElement: document.createElement("div"),
         buttonElement: document.createElement("button"),
         counterText: document.createElement("p"),
-        abbrElement: document.createElement("abbr")
+        abbrElement: document.createElement("abbr"),
     },
     {
         item: {
@@ -24,15 +25,15 @@ export const initialButtons: Shop.ShopButton[] = [
             cost: 100,
             unlockValue: 0,
             clickBonus: 0,
-            description:"The social media platform Twitter (not X). Allows for the production and networking of Orteil42s."
-
+            description:
+                "The social media platform Twitter (not X). Allows for the production and networking of Orteil42s.",
         },
         multCost: 100,
         numPurchased: 0,
         divElement: document.createElement("div"),
         buttonElement: document.createElement("button"),
         counterText: document.createElement("p"),
-        abbrElement: document.createElement("abbr")
+        abbrElement: document.createElement("abbr"),
     },
     {
         item: {
@@ -41,14 +42,15 @@ export const initialButtons: Shop.ShopButton[] = [
             cost: 1000,
             unlockValue: 0,
             clickBonus: 0,
-            description: "The game Cookie Clicker, made by developer Orteil42. Draws in Orteils at a more reasonable rate."
+            description:
+                "The game Cookie Clicker, made by developer Orteil42. Draws in Orteils at a more reasonable rate.",
         },
         multCost: 1000,
         numPurchased: 0,
         divElement: document.createElement("div"),
         buttonElement: document.createElement("button"),
         counterText: document.createElement("p"),
-        abbrElement: document.createElement("abbr")
+        abbrElement: document.createElement("abbr"),
     },
 ];
 
@@ -60,14 +62,15 @@ export const unlockableButtons: Shop.ShopButton[] = [
             cost: 500,
             unlockValue: 1000,
             clickBonus: 0,
-            description: "The social media platform Tumblr. Attracts Orteil42s that may or may not be transgender?"
+            description:
+                "The social media platform Tumblr. Attracts Orteil42s that may or may not be transgender?",
         },
         multCost: 500,
         numPurchased: 0,
         divElement: document.createElement("div"),
         buttonElement: document.createElement("button"),
         counterText: document.createElement("p"),
-        abbrElement: document.createElement("abbr")
+        abbrElement: document.createElement("abbr"),
     },
     {
         item: {
@@ -76,14 +79,15 @@ export const unlockableButtons: Shop.ShopButton[] = [
             cost: 150,
             unlockValue: 500,
             clickBonus: 0,
-            description: "Orteil42's Mother. Produces Orteils for slow but cheap."
+            description:
+                "Orteil42's Mother. Produces Orteils for slow but cheap.",
         },
         multCost: 150,
         numPurchased: 0,
         divElement: document.createElement("div"),
         buttonElement: document.createElement("button"),
         counterText: document.createElement("p"),
-        abbrElement: document.createElement("abbr")
+        abbrElement: document.createElement("abbr"),
     },
     {
         item: {
@@ -92,13 +96,31 @@ export const unlockableButtons: Shop.ShopButton[] = [
             cost: 20,
             unlockValue: 1,
             clickBonus: 0.5,
-            description: "A tutorial on typescript web programming. Allows for more efficient Orteil42 production."
+            description:
+                "A tutorial on typescript web programming. Allows for more efficient Orteil42 production.",
         },
         multCost: 20,
         numPurchased: 0,
         divElement: document.createElement("div"),
         buttonElement: document.createElement("button"),
         counterText: document.createElement("p"),
-        abbrElement: document.createElement("abbr")
+        abbrElement: document.createElement("abbr"),
+    },
+    {
+        item: {
+            name: "Orteil's Mouse",
+            value: 0,
+            cost: 1000,
+            unlockValue: 5000,
+            clickBonus: 10,
+            description:
+                "Orteil42's mouse. Surely allows for more effective Orteil-Click ratios.",
+        },
+        multCost: 1000,
+        numPurchased: 0,
+        divElement: document.createElement("div"),
+        buttonElement: document.createElement("button"),
+        counterText: document.createElement("p"),
+        abbrElement: document.createElement("abbr"),
     },
 ];
