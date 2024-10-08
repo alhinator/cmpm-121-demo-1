@@ -8,6 +8,7 @@ export interface Item {
     clickBonus: number;
     cost: number;
     unlockValue: number;
+    description:string;
 }
 
 export interface Shop {
@@ -22,6 +23,7 @@ export interface ShopButton {
     divElement: HTMLDivElement;
     buttonElement: HTMLButtonElement;
     counterText: HTMLParagraphElement;
+    abbrElement:HTMLElement;
 }
 
 export function verifyAllButtons(buttons: ShopButton[], score: number) {
@@ -56,13 +58,16 @@ export function activateHTML(_shop: Shop) {
 
         updateOwnedText(b);
 
+        b.abbrElement.setAttribute("title", b.item.description)
+
         //set onclick
         b.buttonElement.onclick = function () {
             purchaseAButton(b);
         };
 
         //now child them all
-        b.divElement.appendChild(b.buttonElement);
+        b.abbrElement.appendChild(b.buttonElement);
+        b.divElement.appendChild(b.abbrElement)
         b.divElement.appendChild(b.counterText);
         _shop.parentDiv.appendChild(b.divElement);
     });
