@@ -74,9 +74,7 @@ requestAnimationFrame(AutoManager.incAutoScores);
 new ShopButton("France", 1, 10, shopDiv);
 new ShopButton("Twitter", 2, 100, shopDiv);
 new ShopButton("CookieClicker", 50, 1000, shopDiv);
-new ShopButton("CookieClicker2", 50, 1000, shopDiv);
-new ShopButton("CookieClicker3", 50, 1000, shopDiv);
-new ShopButton("CookieClicker4", 50, 1000, shopDiv);
+
 
 
 ShopButton.verifyAllButtons();

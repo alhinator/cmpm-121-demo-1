@@ -98,7 +98,7 @@ div{
     margin: 1em;
     border: #202034;
     border-style: inset;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
   .clicker {
     text-align: center;
