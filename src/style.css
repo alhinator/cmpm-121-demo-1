@@ -64,6 +64,15 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.mainButton{
+  text-align: left;
+  width: 11em;
+  padding: 0.5em 0.6em;
+  background: url("./img/Orteil_tumblr_icon.webp");
+  background-repeat: no-repeat;
+  background-position: 91%;
+  background-size: 1em;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -85,7 +94,7 @@ div{
     justify-content: left;
     margin-left: 0%;
     border: #094e67;
-    border-style:inset;
+    border-style:outset;
   }
   .shop {
     justify-self: left;
@@ -96,7 +105,8 @@ div{
     scroll-behavior: smooth;
     scrollbar-width: 1em;
     margin: 1em;
-    border: #202034;
+    border: #000000;
+    border-width: 0.5em;
     border-style: inset;
     overflow-y: auto;
   }

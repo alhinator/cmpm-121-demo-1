@@ -42,10 +42,11 @@ export function incScore(add: number): void {
 const clickValue = 1;
 const clickerBar = document.createElement("h2");
 const mainClicker = document.createElement("button");
+mainClicker.setAttribute("class", "mainButton")
 mainClicker.onclick = () => {
     incScore(clickValue);
 };
-mainClicker.innerHTML = "get more orteil42 🥖";
+mainClicker.innerHTML = "get more orteil42  ";
 clickerBar.append(mainClicker);
 clickerDiv.append(clickerBar);
 
@@ -63,8 +64,6 @@ export function updateSPS():void{
 }
 
 
-
-
 //start the anim frame cycle. now updates frame count from within AutoManager
 requestAnimationFrame(AutoManager.incAutoScores);
 
@@ -74,7 +73,5 @@ requestAnimationFrame(AutoManager.incAutoScores);
 new ShopButton("France", 1, 10, shopDiv);
 new ShopButton("Twitter", 2, 100, shopDiv);
 new ShopButton("CookieClicker", 50, 1000, shopDiv);
-
-
 
 ShopButton.verifyAllButtons();
