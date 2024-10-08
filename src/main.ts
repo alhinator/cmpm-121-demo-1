@@ -15,9 +15,7 @@ let scoreDisplay: string = "0";
 //mainScore access func
 function incScore(add: number): void {
     mainScore += add;
-    scoreDisplay = mainScore.toLocaleString("fullwide", {
-        maximumFractionDigits: 2,
-    });
+    scoreDisplay = mainScore.toFixed(2)
     counterField.innerText = "Orteils: " + scoreDisplay;
     //now verify buttons
     ShopButton.verifyAllButtons();
@@ -37,6 +35,7 @@ app.append(clickerBar);
 //add the field that tracks score
 const counterField = document.createElement("h2");
 counterField.innerText = "Orteils: " + mainScore;
+counterField.style.justifySelf = "left"
 app.append(counterField);
 
 //add the field that tracks score per second
@@ -215,9 +214,8 @@ class ShopButton {
     }
     updatePrice(){
         this.numPurchased++
-        this.multCost = (Number) ((this.baseCost * Math.pow(1.15, this.numPurchased)).toLocaleString("fullwide", {
-            maximumFractionDigits: 2,
-        }));
+        this.multCost = (Number) ((this.baseCost * Math.pow(1.15, this.numPurchased)).toFixed(2))
+        
     }
     updateOwnedText(){
         this.privButtonElement.innerText =
@@ -240,9 +238,9 @@ class ShopButton {
     }
 
     static verifyAllButtons() {
-        ShopButton.allShopButtons.forEach((element) => {
-            element.toggleClickable();
-        });
+        // ShopButton.allShopButtons.forEach((element) => {
+        //     element.toggleClickable();
+        // });
     }
 }
 
