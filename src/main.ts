@@ -23,19 +23,10 @@ const clickerDiv = document.createElement("div")
 clickerDiv.setAttribute("class", "clicker")
 app.append(clickerDiv)
 
-
-
-//new item adds
-const initItems: Shop.Item[] = [
-    {name: "France", value: 1, cost: 10},
-    {name: "Twitter", value: 2, cost: 100},
-    {name: "Cookie Clicker", value: 50, cost: 1000}
-]
-
 const initialButtons:Shop.ShopButton[] = [
-    {item: initItems[0], multCost:initItems[0].cost, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
-    {item: initItems[1], multCost:initItems[1].cost, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
-    {item: initItems[2], multCost:initItems[2].cost, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+    {item: {name: "France", value: 1, cost: 10}, multCost:10, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+    {item:  {name: "Twitter", value: 2, cost: 100}, multCost:100, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+    {item: {name: "Cookie Clicker", value: 50, cost: 1000}, multCost:1000, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
 ]
 
 const mainShop:Shop.Shop = {
