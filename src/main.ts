@@ -28,6 +28,10 @@ const initialButtons:Shop.ShopButton[] = [
     {item:  {name: "Twitter", value: 2, cost: 100}, multCost:100, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
     {item: {name: "Cookie Clicker", value: 50, cost: 1000}, multCost:1000, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
 ]
+const unlockableButtons:Shop.ShopButton[] = [
+    {item: {name: "Tumblr", value: 5, cost: 50}, multCost:50, numPurchased:0, divElement:document.createElement("div"), buttonElement:document.createElement("button"), counterText:document.createElement("p")},
+
+]
 
 const mainShop:Shop.Shop = {
     parentDiv:shopDiv,
@@ -71,10 +75,10 @@ clickerDiv.append(counterField);
 //add the field that tracks score per second
 const SPSField = document.createElement("h3")
 clickerDiv.appendChild(SPSField)
+
 export function updateSPS():void{
     SPSField.innerText = "Total Orteils per second: " + Shop.valuePerSecond(mainShop.allButtons)
 }
-
 
 //start the anim frame cycle.
 let frameCounterTimer = 0
@@ -87,13 +91,10 @@ let frameCounterTimer = 0
         sum += element.item.value * element.numPurchased * delta;
     })
     incScore(sum)
+    Shop.unlockCheck(mainScore, mainShop, unlockableButtons)
     requestAnimationFrame(autoScore)
 }
 
 requestAnimationFrame(autoScore);
-
-// //NO LONGER ADD "Default" autoscorer
-
-
 
 Shop.verifyAllButtons(mainShop.allButtons, mainScore);

@@ -91,3 +91,13 @@ function updatePrice(b:ShopButton){
     b.multCost = (Number) ((b.item.cost * Math.pow(1.15, b.numPurchased)).toFixed(2))
     
 }
+
+//unlock check unlocks certain shop options if the current score is above their base cost.
+export function unlockCheck(_currScore:number, _shop:Shop, _listOfUnlocks:ShopButton[]){
+    _listOfUnlocks.forEach(nu => {
+        if(_currScore >= nu.item.cost && !_shop.allButtons.includes(nu)){
+            _shop.allButtons.push(nu);
+            activateHTML(_shop)
+        }
+    });
+}
