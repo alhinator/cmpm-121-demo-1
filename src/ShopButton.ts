@@ -6,6 +6,7 @@ export class ShopButton {
     protected privValue: number;
     protected baseCost: number;
     protected multCost: number;
+    protected privDiv: HTMLDivElement;
     protected privButtonElement: HTMLButtonElement;
     protected privButtonCounterText: HTMLParagraphElement;
     protected numPurchased:number = 0;
@@ -16,24 +17,34 @@ export class ShopButton {
         
         _parent_DOM: HTMLElement
     ) {
+        //assign basic values
         this.privName = _name;
         this.privValue = _value;
         this.baseCost = _cost;
         this.multCost = _cost
+
+        //init html stuff
+        this.privDiv = document.createElement("div")
+        this.privDiv.setAttribute("class", "shopElement")
+
         this.privButtonElement = document.createElement("button");
-        _parent_DOM.appendChild(this.privButtonElement);
         this.privButtonElement.innerText =
-            "Purchase " +
-            this.name +
-            " (" +
-            _value +
-            " O/s) for " +
-            this.multCost +
-            " Orteils.";
+        "Purchase " +
+        this.name +
+        " (" +
+        _value +
+        " O/s) for " +
+        this.multCost +
+        " Orteils.";
+        this.privDiv.appendChild(this.privButtonElement)
+
+        
+        
         this.privButtonCounterText = document.createElement("p")
         this.updateOwnedText()
-        _parent_DOM.appendChild(this.privButtonCounterText)
-        _parent_DOM.appendChild(document.createElement("br"))
+        this.privDiv.appendChild(this.privButtonCounterText)
+        
+        _parent_DOM.appendChild(this.privDiv);
 
         this.privButtonElement.onclick = function () {
             ShopButton.purchaseAButton(_name);

@@ -12,6 +12,19 @@ const header = document.createElement("h1");
 header.innerHTML = gameName;
 app.append(header);
 
+//add the field that holds buttons
+const shopDiv = document.createElement("div");
+shopDiv.setAttribute("class", "shop")
+app.append(shopDiv);
+
+//add clicker and info field
+const clickerDiv = document.createElement("div")
+clickerDiv.setAttribute("class", "clicker")
+app.append(clickerDiv)
+
+
+
+
 //this score is the main score, should never be modified directly, rather use incScore
 let mainScore: number = 0;
 export function getMS():number {return mainScore}
@@ -34,25 +47,22 @@ mainClicker.onclick = () => {
 };
 mainClicker.innerHTML = "get more orteil42 🥖";
 clickerBar.append(mainClicker);
-app.append(clickerBar);
+clickerDiv.append(clickerBar);
 
 //add the field that tracks score
 const counterField = document.createElement("h2");
 counterField.innerText = "Orteils: " + mainScore;
 counterField.style.justifySelf = "left"
-app.append(counterField);
+clickerDiv.append(counterField);
 
 //add the field that tracks score per second
 const SPSField = document.createElement("h3")
-app.appendChild(SPSField)
+clickerDiv.appendChild(SPSField)
 export function updateSPS():void{
     SPSField.innerText = "Total Orteils per second: " + AutoManager.valuePerSecond
 }
 
-//add the field that holds buttons
-const buttonField = document.createElement("div");
-buttonField.style.float = "left"
-app.append(buttonField);
+
 
 
 //start the anim frame cycle. now updates frame count from within AutoManager
@@ -61,8 +71,12 @@ requestAnimationFrame(AutoManager.incAutoScores);
 //NO LONGER ADD "Default" autoscorer
 
 //Add Shop Buttons and initially verify them (turn them off)
-new ShopButton("France", 1, 10, buttonField);
-new ShopButton("Twitter", 2, 100, buttonField);
-new ShopButton("CookieClicker", 50, 1000, buttonField);
+new ShopButton("France", 1, 10, shopDiv);
+new ShopButton("Twitter", 2, 100, shopDiv);
+new ShopButton("CookieClicker", 50, 1000, shopDiv);
+new ShopButton("CookieClicker2", 50, 1000, shopDiv);
+new ShopButton("CookieClicker3", 50, 1000, shopDiv);
+new ShopButton("CookieClicker4", 50, 1000, shopDiv);
+
 
 ShopButton.verifyAllButtons();
