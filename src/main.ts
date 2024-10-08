@@ -238,9 +238,9 @@ class ShopButton {
     }
 
     static verifyAllButtons() {
-        // ShopButton.allShopButtons.forEach((element) => {
-        //     element.toggleClickable();
-        // });
+        ShopButton.allShopButtons.forEach((element) => {
+            element.toggleClickable();
+        });
     }
 }
 
