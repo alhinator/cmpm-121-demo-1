@@ -55,16 +55,12 @@ buttonField.style.float = "left"
 app.append(buttonField);
 
 
-
-
 //start the anim frame cycle. now updates frame count from within AutoManager
 requestAnimationFrame(AutoManager.incAutoScores);
 
 //NO LONGER ADD "Default" autoscorer
 
-//SHOP
-
-
+//Add Shop Buttons and initially verify them (turn them off)
 new ShopButton("France", 1, 10, buttonField);
 new ShopButton("Twitter", 2, 100, buttonField);
 new ShopButton("CookieClicker", 50, 1000, buttonField);
