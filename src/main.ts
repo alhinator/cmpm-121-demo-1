@@ -56,15 +56,19 @@ function autoScore(
     _time: number,
     items: Shop.ShopButton[] = mainShop.allButtons
 ) {
-    const delta = (performance.now() - frameCounterTimer) / 1000;
-    frameCounterTimer = performance.now();
-    let sum = 0;
     items.forEach((element) => {
-        sum += element.item.value * element.numPurchased * delta;
+        incScore( element.item.value * element.numPurchased * getDeltaTime());
     });
-    incScore(sum);
+    updateFrameCounter();
     Shop.unlockCheck(mainScore, mainShop, unlockableButtons);
     requestAnimationFrame(autoScore);
+}
+
+function getDeltaTime():number{
+    return (performance.now() - frameCounterTimer) / 1000;
+}
+function updateFrameCounter(){
+    frameCounterTimer = performance.now();
 }
 
 
