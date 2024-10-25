@@ -1,6 +1,4 @@
 import "./style.css";
-//import { AutoManager } from "./AutoScoreSource";
-//import { ShopButton } from "./ShopButton";
 import * as Shop from "./Shop";
 import { initialButtons, unlockableButtons } from "./ItemData";
 const app: HTMLDivElement = document.querySelector("#app")!;
@@ -30,13 +28,11 @@ const mainShop: Shop.Shop = {
 mainShop.allButtons = initialButtons;
 Shop.activateHTML(mainShop);
 
-//this score is the main score, should never be modified directly, rather use incScore
 let mainScore: number = 0;
 export function getMS(): number {
     return mainScore;
 }
 let scoreDisplay: string = "0";
-//mainScore access func
 export function incScore(add: number): void {
     mainScore += add;
     scoreDisplay = mainScore.toFixed(2);
@@ -44,8 +40,6 @@ export function incScore(add: number): void {
     //now verify buttons
     Shop.verifyAllButtons(mainShop.allButtons, mainScore);
 }
-
-//add the clicker bar, clicker, and set the default value for clicks.
 
 const clickerBar = document.createElement("h2");
 const mainClicker = document.createElement("button");
@@ -78,15 +72,13 @@ export function updateSPC(): void {
         "Total Orteils per click: " + Shop.valuePerClick(mainShop.allButtons);
 }
 
-//start the anim frame cycle.
 let frameCounterTimer = 0;
 function autoScore(
     _time: number,
     items: Shop.ShopButton[] = mainShop.allButtons
 ) {
-    const delta = (performance.now() - frameCounterTimer) / 1000; //get the delta between frames in terms of seconds
+    const delta = (performance.now() - frameCounterTimer) / 1000;
     frameCounterTimer = performance.now();
-    //console.log(delta)
     let sum = 0;
     items.forEach((element) => {
         sum += element.item.value * element.numPurchased * delta;
