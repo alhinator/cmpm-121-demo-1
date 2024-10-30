@@ -11,6 +11,11 @@ const header = document.createElement("h1");
 const shopDiv = document.createElement("div");
 
 const clickerDiv = document.createElement("div");
+<<<<<<< Updated upstream
+=======
+clickerDiv.setAttribute("class", "clicker");
+app.append(clickerDiv);
+>>>>>>> Stashed changes
 
 const mainShop: Shop.Shop = {
     parentDiv: shopDiv,
@@ -84,16 +89,52 @@ app.append(clickerDiv);
 mainShop.allButtons = initialButtons;
 Shop.activateHTML(mainShop);
 
+<<<<<<< Updated upstream
+=======
+const clickerBar = document.createElement("h2");
+const mainClicker = document.createElement("button");
+const ftext = document.createElement("p");
+let lastID: number;
+clickerDiv.appendChild(ftext);
+
+ftext.classList.add("floatingText");
+ftext.innerText = "+1";
+ftext.style.setProperty("visibility", "hidden");
+ftext.style.position = "absolute";
+ftext.style.zIndex = "5";
+// = true;
+
+>>>>>>> Stashed changes
 mainClicker.setAttribute("class", "mainButton");
-mainClicker.onclick = () => {
-    incScore(Shop.valuePerClick(mainShop.allButtons));
+mainClicker.onclick = (e) => {
+    const v = Shop.valuePerClick(mainShop.allButtons);
+    incScore(v);
+
+    //code for css styling altered from https://stackoverflow.com/questions/28267256/how-to-move-an-element-to-the-mouse-position
+    const x = e.clientX;
+    const y = e.clientY;
+    ftext.style.left = `${x + 20}px`;
+    ftext.style.top = `${y}px`;
+    ftext.style.zIndex = "5";
+
+    ftext.style.setProperty("visibility", "visible");
+    ftext.innerText = "+" + v;
+    ftext.classList.remove("floatingText");
+    void ftext.offsetWidth;
+    ftext.classList.add("floatingText");
+
+    clearTimeout(lastID);
+
+    lastID = setTimeout(() => {
+        ftext.style.setProperty("visibility", "hidden");
+    }, 750);
 };
 mainClicker.innerHTML = "get more orteil42  ";
 clickerBar.append(mainClicker);
 clickerDiv.append(clickerBar);
 
 counterField.innerText = "Orteils: " + mainScore;
-counterField.style.justifySelf = "left";
+counterField.style.justifySelf = "center";
 clickerDiv.append(counterField);
 
 clickerDiv.appendChild(SPSField);
