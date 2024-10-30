@@ -7,26 +7,16 @@ const app: HTMLDivElement = document.querySelector("#app")!;
 const gameName = "orteil42 clicker";
 
 const header = document.createElement("h1");
-
 const shopDiv = document.createElement("div");
-
 const clickerDiv = document.createElement("div");
-<<<<<<< Updated upstream
-=======
-clickerDiv.setAttribute("class", "clicker");
-app.append(clickerDiv);
->>>>>>> Stashed changes
-
 const mainShop: Shop.Shop = {
     parentDiv: shopDiv,
     allButtons: [],
 };
-
 const clickerBar = document.createElement("h2");
 const mainClicker = document.createElement("button");
-
 const counterField = document.createElement("h2");
-
+const ftext = document.createElement("p");
 const SPSField = document.createElement("h3");
 const SPCField = document.createElement("h3");
 
@@ -89,11 +79,6 @@ app.append(clickerDiv);
 mainShop.allButtons = initialButtons;
 Shop.activateHTML(mainShop);
 
-<<<<<<< Updated upstream
-=======
-const clickerBar = document.createElement("h2");
-const mainClicker = document.createElement("button");
-const ftext = document.createElement("p");
 let lastID: number;
 clickerDiv.appendChild(ftext);
 
@@ -102,15 +87,14 @@ ftext.innerText = "+1";
 ftext.style.setProperty("visibility", "hidden");
 ftext.style.position = "absolute";
 ftext.style.zIndex = "5";
-// = true;
 
->>>>>>> Stashed changes
 mainClicker.setAttribute("class", "mainButton");
 mainClicker.onclick = (e) => {
     const v = Shop.valuePerClick(mainShop.allButtons);
     incScore(v);
 
     //code for css styling altered from https://stackoverflow.com/questions/28267256/how-to-move-an-element-to-the-mouse-position
+    // and https://css-tricks.com/restart-css-animation/
     const x = e.clientX;
     const y = e.clientY;
     ftext.style.left = `${x + 20}px`;
